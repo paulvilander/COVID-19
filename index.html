@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa COVID-19</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="cabecera">
+        <h1>Mapa COVID-19</h1>
+        <p>Fuente:https://wuhan-coronavirus-api</p>
+    </div>
+    <div id="map" class="map"></div>
+
+    <script src="http://maps.googleapis.com/maps/api/js?key=[tu llave de acceso]"></script>
+    <script type="module">
+    
+    import styles from './style_map.js'
+    
+    const $map = document.querySelector('#map')//selector 
+
+    const map = new window.google.maps.Map($map, {center:{lat:0,lng:0, },zoom: 2.8,styles})
+    renderData()
+   
+     async function getData(){
+
+       const response = await fetch('https://wuhan-coronavirus-api.laeyoung.endpoint.ainize.ai/jhu-edu/latest') 
+
+       const data = await response.json()
+
+       return data
+     } 
+    
+     const popup = new window.google.maps.InfoWindow()
+
+     function renderExtraData({confirmed,deaths,recovered,provincestate,countryregion}){
+         return `
+         <div>
+             <p class="title"> <strong>${countryregion} | ${provincestate}</strong></p>
+             <p class="confirmed">Casos Confirmados : ${confirmed}</p>
+             <p class="death">Muertes : ${deaths}</p>
+             <p class="recovered">Recuperados : ${recovered}</p>
+        </div>
+         `
+     }
+
+     async function renderData() {
+        
+        const data = await getData()
+        console.log(data) 
+        
+        data.forEach(item => {
+            if (item.confirmed) {
+                 const marker =  new window.google.maps.Marker({
+                position:{
+                    lat: item.location.lat,
+                    lng:item.location.lng,
+                },
+                map,
+                icon:'./covid.png'
+             })
+               
+             marker.addListener('click', () =>{
+               //Funcion para rellenar los popup
+               popup.setContent(renderExtraData(item)) 
+               popup.open(map,marker)
+             })
+            }
+          
+        })
+
+     }  
+     
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+body{
+    margin: 0;
+    background-color:#192331 ;
+   
+}
+.gm-style .gm-style-iw-c{
+background-color: dimgrey;
+}
+.gm-style .gm-style-iw-d::-webkit-scrollbar-track, .gm-style .gm-style-iw-d::-webkit-scrollbar-track-piece {
+    background: dimgrey;
+}
+.cabecera{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    height: 100px;
+    text-align: center;
+    background-color:#192331 ;
+    color: ghostwhite;
+}
+.cabecera p{
+   font-size: 13px;
+}
+p.title{
+    text-align: center;
+    background-color: #4d4a4a;
+    color: ghostwhite;
+    padding: 10px;
+    border-radius: 5px;
+}
+p.confirmed{
+    background-color: rgb(181, 184, 21);
+    color: ghostwhite;
+    padding: 10px;
+    border-radius: 5px;
+}
+p.death{
+    background-color: rgb(192, 56, 56);
+    color: ghostwhite;
+    padding: 10px;
+    border-radius: 5px;
+}
+p.recovered{
+    background-color: rgb(13, 139, 8);
+    color: ghostwhite;
+    padding: 10px;
+    border-radius: 5px;
+}
+.map{
+    width: 100vw;
+    height: 100vh;
+}
+{
+
+}
